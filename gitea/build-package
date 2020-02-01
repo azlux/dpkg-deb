@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Exit the script if any of the commands fail
+set -e
+set -u
+set -o pipefail
+
+# Set working directory to the location of this script
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+STARTDIR="$(pwd)"
+DESTDIR="$STARTDIR/pkg"
+OUTDIR="$STARTDIR/deb"
+
+# Remove potential leftovers from a previous build
+rm -rf "$DESTDIR" "$OUTDIR"
+
+wget -q https://github.com/$repo/releases/download/v$new/gitea-$new-linux-$dist -O "$STARTDIR/gitea"
+wget -q https://raw.githubusercontent.com/go-gitea/gitea/master/contrib/systemd/gitea.service -O "$STARTDIR/gitea.service"
+install -Dm 755 "$STARTDIR/gitea" "$DESTDIR/usr/local/bin/gitea"
+install -Dm 755 "$STARTDIR/gitea.service" "$DESTDIR/etc/systemd/system/gitea.service"
+install -dm 750 "$DESTDIR/var/lib/gitea/custom"
+install -dm 750 "$DESTDIR/var/lib/gitea/data"
+install -dm 750 "$DESTDIR/var/lib/gitea/indexers"
+install -dm 750 "$DESTDIR/var/lib/gitea/public"
+install -dm 750 "$DESTDIR/var/lib/gitea/log"
+install -dm 770 "$DESTDIR/etc/gitea"
+
+mkdir  "$OUTDIR"
+dpkg-deb --build "$DESTDIR" "$OUTDIR"
