@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -e
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+# This conf script is capable of backing up
+db_capb backup
+
+STATE=1 
+while [ "$STATE" != 0 -a "$STATE" != 8 ]; do
+    case "$STATE" in
+    1)
+        # Ask username
+        db_input high sheepit/user || true
+    ;;
+    2)
+        # Ask Password
+        db_input high sheepit/pass || true
+    ;;
+    3)
+        # Ask CPU and/or GPU
+        db_input high sheepit/cpu_gpu || true
+    ;;
+    4)
+        # Ask number of CPU
+        db_input high sheepit/select_cpu || true
+    ;;
+    5)
+        # Ask GPU name
+        db_input high sheepit/select_gpu || true
+    ;;
+    6)
+        # Ask priority
+        db_input high sheepit/priority || true
+    ;;
+    
+	7)
+        # Ask Other parameter
+        db_input high sheepit/additional_config || true
+    ;;
+
+    esac
+
+    if db_go; then
+        STATE=$(($STATE + 1))
+    else
+        STATE=$(($STATE - 1))
+    fi
+done
+
+exit 0

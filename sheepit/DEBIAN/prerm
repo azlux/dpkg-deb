@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+[ -d  /run/systemd/system/ ] && systemctl stop sheepit
+
+exit 0

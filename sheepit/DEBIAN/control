@@ -1,0 +1,11 @@
+Package: sheepit
+Version: VERSION-TO-REPLACE
+Section: net
+Priority: optional
+Architecture: all
+Depends: default-jre, libxi6, libxrender1, libxxf86vm1, libxfixes3, debconf
+Recommends: libmvec-dev
+Maintainer: Azlux <github@azlux.fr>
+Description: SheepIt is a free distributed renderfarm for Blender
+Homepage: https://www.sheepit-renderfarm.com/
+Bugs: https://www.sheepit-renderfarm.com/forum/

@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Exit the script if any of the commands fail
+set -e
+set -u
+set -o pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")"
+VERSION=$(curl -s 'https://www.sheepit-renderfarm.com/media/applet/client-info.php?get=version')
+STARTDIR="$(pwd)"
+DESTDIR="$STARTDIR/pkg"
+OUTDIR="$STARTDIR/deb"
+rm -rf "$DESTDIR" "$OUTDIR"
+
+wget -q https://www.sheepit-renderfarm.com/media/applet/client-latest.php -O "$STARTDIR/sheepit-client.jar"
+
+install -Dm 755 "$STARTDIR/sheepit-client.jar" "$DESTDIR/usr/lib/sheepit-client.jar"
+install -Dm 644 "$STARTDIR/sheepit.service" "$DESTDIR/etc/systemd/system/sheepit.service"
+
+mkdir -p "$DESTDIR/DEBIAN"
+cp "$STARTDIR/DEBIAN/"* "$DESTDIR/DEBIAN/"
+chmod 755 $DESTDIR/DEBIAN/*
+
+
+sed -i "s/VERSION-TO-REPLACE/$VERSION" "$DESTDIR/DEBIAN/control"
+
+mkdir  "$OUTDIR"
+dpkg-deb --build "$DESTDIR" "$OUTDIR"

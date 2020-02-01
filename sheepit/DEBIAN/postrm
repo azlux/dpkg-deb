@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+case "$1" in
+    purge)
+	if [ -e /usr/share/debconf/confmodule ]; then
+	    . /usr/share/debconf/confmodule
+        db_purge
+	fi
+esac
+
+exit 0

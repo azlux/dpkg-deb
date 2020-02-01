@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+set -e
+. /usr/share/debconf/confmodule
+
+
+# GET ALL VARIABLES
+db_get sheepit/user
+USER="$RET"
+
+db_get sheepit/pass
+PASS="$RET"
+
+db_get sheepit/cpu_gpu
+GPU_CPU="$RET"
+
+db_get sheepit/select_cpu
+SELECT_CPU="$RET"
+
+db_get sheepit/select_gpu
+SELECT_GPU="$RET"
+
+db_get sheepit/priority
+PRIORITY="$RET"
+
+db_get sheepit/additional_config
+ADD_CONF="$RET"
+
+
+params="-login $USER"
+params+=" -password \"$PASS\""
+
+[ "$SELECT_CPU" == "CPU, GPU" ] && SELECT_CPU="CPU_GPU"
+params+=" -compute-method $GPU_CPU"
+
+[ -n "$SELECT_CPU" ] && params+=" -cores $SELECT_CPU"
+[ -n "$SELECT_GPU" ] && params+=" -gpu $SELECT_GPU"
+
+params+=" -priority $PRIORITY"
+params+=" -ui text"
+
+sed -i 's~SHEEPIT_PARAMETERS~'"$params"'~' /etc/systemd/system/sheepit.service 
+
+if [ -d  /run/systemd/system/ ]; then
+    systemctl daemon-reload
+    if [ ! "$(command -v java)" ]; then
+        echo "Java not found, please be sure java is into your PATH"
+    else
+        [ -n "$USER" ] && [ -n "$PASS" ] || echo " No User/Pasword config !! PLEASE DO \"dpkg-reconfigure sheepit\" !!"
+        systemctl enable sheepit
+        systemctl restart sheepit || echo "! Systemd service failed to start, please check"
+    fi
+fi
+
+exit 0

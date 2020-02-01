@@ -1,0 +1,12 @@
+[Unit]
+Description=SHEEPIT
+
+[Service]
+ExecStart=java -jar /usr/lib/sheepit-client.jar SHEEPIT_PARAMETERS
+Restart=always
+Type=simple
+RestartSec=60s
+
+[Install]
+WantedBy=multi-user.target
+
