@@ -1,0 +1,11 @@
+Package: gitea
+Version: VERSION-TO-REPLACE
+Section: net
+Priority: optional
+Architecture: ARCHI-TO-REPLACE
+Depends: git
+Recommends: sqlite3
+Maintainer: Azlux <github@azlux.fr>
+Description: Git with a cup of tea, painless self-hosted git service
+Homepage: https://github.com/go-gitea/gitea/
+Bugs: https://github.com/go-gitea/gitea/issues
