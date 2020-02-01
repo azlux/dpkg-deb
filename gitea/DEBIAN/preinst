@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+adduser --system --group --disabled-password --shell /bin/bash --home /home/git --gecos 'Git Version Control' git
+exit 0
