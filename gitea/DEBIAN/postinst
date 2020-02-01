@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+chown git: /var/lib/gitea/{data,indexers,log}
+chown root:git /etc/gitea
+
+[ -d  /run/systemd/system/ ] && systemctl daemon-reload
+[ -d  /run/systemd/system/ ] && systemctl enable gitea
+[ -d  /run/systemd/system/ ] && systemctl restart gitea
+
+exit 0
