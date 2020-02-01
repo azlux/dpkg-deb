@@ -19,10 +19,9 @@ install -Dm 644 "$STARTDIR/sheepit.service" "$DESTDIR/etc/systemd/system/sheepit
 
 mkdir -p "$DESTDIR/DEBIAN"
 cp "$STARTDIR/DEBIAN/"* "$DESTDIR/DEBIAN/"
-chmod 755 $DESTDIR/DEBIAN/*
 
 
-sed -i "s/VERSION-TO-REPLACE/$VERSION" "$DESTDIR/DEBIAN/control"
+sed -i "s/VERSION-TO-REPLACE/$VERSION/" "$DESTDIR/DEBIAN/control"
 
 mkdir  "$OUTDIR"
 dpkg-deb --build "$DESTDIR" "$OUTDIR"

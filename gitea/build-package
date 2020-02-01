@@ -20,7 +20,7 @@ all_dist=('amd64' '386' 'arm-6' 'arm64')
 for dist in "${all_dist[@]}"; do
 
     # Remove potential leftovers from a previous build
-    rm -rf "$DESTDIR" "$OUTDIR"
+    rm -rf "$DESTDIR"
 
 
     wget -q https://github.com/$repo/releases/download/v$new/gitea-$new-linux-$dist -O "$STARTDIR/gitea"
