@@ -36,6 +36,7 @@ for dist in "${all_dist[@]}"; do
     install -dm 750 "$DESTDIR/var/lib/gitea/log"
     install -dm 770 "$DESTDIR/etc/gitea"
     
+    mkdir -p "$DESTDIR/DEBIAN"
     cp "$STARTDIR/DEBIAN/"* "$DESTDIR/DEBIAN/"
     
     # Modify control file for build
