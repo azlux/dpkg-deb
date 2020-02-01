@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+case "$1" in
+    upgrade)
+        ;;
+    *)
+        deluser git --remove-home
+        echo "GIT user removed"
+        ;;
