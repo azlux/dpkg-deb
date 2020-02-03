@@ -8,3 +8,6 @@ case "$1" in
         deluser webhookd
         echo "WEBHOOKD user removed"
         ;;
+esac
+
+exit 0
