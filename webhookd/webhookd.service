@@ -1,0 +1,15 @@
+[Unit]
+Description=WEBHOOKD
+
+[Service]
+ExecStart=webhookd
+User=webhookd
+Group=webhookd
+EnvironmentFile=/etc/webhookd/webhookd-default.conf
+EnvironmentFile=/etc/webhookd/webhookd.conf
+Restart=always
+Type=simple
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target

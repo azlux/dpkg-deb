@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+case "$1" in
+    upgrade)
+        [ -d  /run/systemd/system/ ] && systemctl stop webhookd
+        exit 0
+        ;;
+    *)
+        [ -d  /run/systemd/system/ ] && systemctl stop webhookd
+        [ -d  /run/systemd/system/ ] && systemctl disable webhookd
+        exit 0
+        ;;
+esac

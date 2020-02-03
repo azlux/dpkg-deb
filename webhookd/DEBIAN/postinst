@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+[ -d  /run/systemd/system/ ] && systemctl daemon-reload
+[ -d  /run/systemd/system/ ] && systemctl enable webhookd
+
+[ "$1" == "upgrade" ] && [ -d  /run/systemd/system/ ] && systemctl restart webhookd
+[ "$1" == "configure" ] && [ ! -f /etc/webhookd/webhookd.conf ] && cp /etc/webhookd/webhookd-default.conf /etc/webhookd/webhookd.conf
+
+exit 0

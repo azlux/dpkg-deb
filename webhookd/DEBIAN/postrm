@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+case "$1" in
+    upgrade)
+        ;;
+    purge)
+        rm -r /etc/webhookd/
+    *)
+        deluser webhookd
+        echo "WEBHOOKD user removed"
+        ;;

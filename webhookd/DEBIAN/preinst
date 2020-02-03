@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+adduser --system --group --disabled-password --shell /bin/bash --gecos 'WebHookd System User' webhookd
+exit 0
