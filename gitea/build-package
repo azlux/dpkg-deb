@@ -10,6 +10,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 STARTDIR="$(pwd)"
 DESTDIR="$STARTDIR/pkg"
 OUTDIR="$STARTDIR/deb"
+mkdir "$OUTDIR"
 
 # get version
 repo="go-gitea/gitea"
@@ -21,7 +22,6 @@ for dist in "${all_dist[@]}"; do
 
     # Remove potential leftovers from a previous build
     rm -rf "$DESTDIR"
-
 
     wget -q https://github.com/$repo/releases/download/v$new/gitea-$new-linux-$dist -O "$STARTDIR/gitea"
     wget -q https://raw.githubusercontent.com/go-gitea/gitea/master/contrib/systemd/gitea.service -O "$STARTDIR/gitea.service"
@@ -46,7 +46,6 @@ for dist in "${all_dist[@]}"; do
     sed -i "s/ARCHI-TO-REPLACE/$dist/" "$DESTDIR/DEBIAN/control"
     
     # Build .deb
-    mkdir  "$OUTDIR"
     dpkg-deb --build "$DESTDIR" "$OUTDIR"
     
 done

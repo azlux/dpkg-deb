@@ -10,6 +10,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 STARTDIR="$(pwd)"
 DESTDIR="$STARTDIR/pkg"
 OUTDIR="$STARTDIR/deb"
+mkdir "$OUTDIR"
 
 # get version
 repo="ncarlier/webhookd"
@@ -39,7 +40,6 @@ for dist in "${all_dist[@]}"; do
     sed -i "s/ARCHI-TO-REPLACE/$dist/" "$DESTDIR/DEBIAN/control"
     
     # Build .deb
-    mkdir  "$OUTDIR"
     dpkg-deb --build "$DESTDIR" "$OUTDIR"
     
 done
