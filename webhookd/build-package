@@ -28,7 +28,7 @@ for dist in "${all_dist[@]}"; do
     
     install -Dm 755 "$STARTDIR/webhookd" "$DESTDIR/usr/local/bin/webhookd"
     install -Dm 755 "$STARTDIR/etc/default/webhookd.env" "$DESTDIR/etc/webhookd/webhookd-default.conf"
-    install -Dm 755 "$STARTDIR/webhookd.service" "$DESTDIR/etc/systemd/system/webhookd.service" 
+    install -Dm 644 "$STARTDIR/webhookd.service" "$DESTDIR/etc/systemd/system/webhookd.service" 
     
     mkdir -p "$DESTDIR/DEBIAN"
     cp "$STARTDIR/DEBIAN/"* "$DESTDIR/DEBIAN/"
