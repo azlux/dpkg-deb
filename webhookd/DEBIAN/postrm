@@ -3,7 +3,7 @@ case "$1" in
     upgrade)
         ;;
     purge)
-        rm -r /etc/webhookd/
+        rm /etc/webhookd.env
     *)
         deluser webhookd
         echo "WEBHOOKD user removed"

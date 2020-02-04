@@ -27,7 +27,7 @@ for dist in "${all_dist[@]}"; do
     tar xzf "$STARTDIR/tar.tgz" -C "$STARTDIR/"
     
     install -Dm 755 "$STARTDIR/webhookd" "$DESTDIR/usr/local/bin/webhookd"
-    install -Dm 755 "$STARTDIR/etc/default/webhookd.env" "$DESTDIR/etc/webhookd/webhookd-default.conf"
+    install -Dm 755 "$STARTDIR/etc/default/webhookd.env" "$DESTDIR/etc/default/webhookd.env"
     install -Dm 644 "$STARTDIR/webhookd.service" "$DESTDIR/etc/systemd/system/webhookd.service" 
     
     mkdir -p "$DESTDIR/DEBIAN"
