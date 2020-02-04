@@ -4,6 +4,7 @@ case "$1" in
         ;;
     purge)
         rm /etc/webhookd.env
+        ;;
     *)
         deluser webhookd
         echo "WEBHOOKD user removed"
