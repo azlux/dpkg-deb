@@ -25,9 +25,10 @@ for dist in "${all_dist[@]}"; do
 
     wget -q https://github.com/$repo/releases/download/v$new/webhookd-linux-$dist.tgz -O "$STARTDIR/tar.tgz"
     tar xzf "$STARTDIR/tar.tgz" -C "$STARTDIR/"
+    wget -q https://raw.githubusercontent.com/ncarlier/webhookd/master/etc/default/webhookd.env -O "$STARTDIR/webhookd.env"
     
     install -Dm 755 "$STARTDIR/webhookd" "$DESTDIR/usr/local/bin/webhookd"
-    install -Dm 755 "$STARTDIR/etc/default/webhookd.env" "$DESTDIR/etc/default/webhookd.env"
+    install -Dm 755 "$STARTDIR/webhookd.env" "$DESTDIR/etc/default/webhookd.env"
     install -Dm 644 "$STARTDIR/webhookd.service" "$DESTDIR/etc/systemd/system/webhookd.service" 
     
     mkdir -p "$DESTDIR/DEBIAN"
