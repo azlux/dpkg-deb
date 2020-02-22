@@ -6,3 +6,4 @@ case "$1" in
         deluser git --remove-home
         echo "GIT user removed"
         ;;
+esac
