@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 case "$1" in
-    upgrade)
-        ;;
-    *)
+    remove)
         deluser git --remove-home
         echo "GIT user removed"
+        ;;
+    *)
         ;;
 esac

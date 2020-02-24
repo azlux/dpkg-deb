@@ -4,9 +4,11 @@ case "$1" in
         [ -d  /run/systemd/system/ ] && systemctl stop gitea
         exit 0
         ;;
-    *)
+    remove)
         [ -d  /run/systemd/system/ ] && systemctl stop gitea
         [ -d  /run/systemd/system/ ] && systemctl disable gitea
         exit 0
+        ;;
+    *)
         ;;
 esac
