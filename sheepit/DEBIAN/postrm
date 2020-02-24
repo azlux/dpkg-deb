@@ -2,10 +2,13 @@
 
 case "$1" in
     purge)
-	if [ -e /usr/share/debconf/confmodule ]; then
-	    . /usr/share/debconf/confmodule
-        db_purge
-	fi
+	    if [ -e /usr/share/debconf/confmodule ]; then
+	        . /usr/share/debconf/confmodule
+            db_purge
+	    fi
+	    ;;
+	*)
+	    ;;
 esac
 
 exit 0

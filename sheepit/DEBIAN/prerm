@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
-[ -d  /run/systemd/system/ ] && systemctl stop sheepit
+case "$1" in
+    upgrade)
+        [ -d  /run/systemd/system/ ] && systemctl stop sheepit
+        exit 0
+        ;;
+    *)
+        [ -d  /run/systemd/system/ ] && systemctl stop sheepit
+        [ -d  /run/systemd/system/ ] && systemctl disable sheepit
+        exit 0
+        ;;
+esac
 
-exit 0
