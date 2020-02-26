@@ -15,7 +15,7 @@ mkdir "$OUTDIR"
 # get version
 repo="ncarlier/webhookd"
 api=$(curl --silent "https://api.github.com/repos/$repo/releases/latest")
-new=$(echo $api | grep -Po '"tag_name": "v\K.*?(?=")')
+new=$(echo $api | grep -Po '"tag_name": "\K.*?(?=")')
     
 all_dist=('amd64' 'arm' 'arm64')
 for dist in "${all_dist[@]}"; do
@@ -23,7 +23,7 @@ for dist in "${all_dist[@]}"; do
     # Remove potential leftovers from a previous build
     rm -rf "$DESTDIR"
 
-    wget -q https://github.com/$repo/releases/download/v$new/webhookd-linux-$dist.tgz -O "$STARTDIR/tar.tgz"
+    wget -q https://github.com/$repo/releases/download/$new/webhookd-linux-$dist.tgz -O "$STARTDIR/tar.tgz"
     tar xzf "$STARTDIR/tar.tgz" -C "$STARTDIR/"
     wget -q https://raw.githubusercontent.com/ncarlier/webhookd/master/etc/default/webhookd.env -O "$STARTDIR/webhookd.env"
     
