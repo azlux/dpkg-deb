@@ -4,10 +4,13 @@ case "$1" in
         ;;
     purge)
         rm /etc/webhookd.env
+        if [ -x "$(command -v deluser)" ]; then
+          deluser --quiet --system webhookd > /dev/null || true
+        else
+          echo >&2 "not removing webhookd system account because deluser command was not found"
+        fi
         ;;
     *)
-        deluser webhookd
-        echo "WEBHOOKD user removed"
         ;;
 esac
 

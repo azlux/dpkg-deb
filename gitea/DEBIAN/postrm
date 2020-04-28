@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 case "$1" in
-    remove)
-        deluser git --remove-home
-        echo "GIT user removed"
+    purge)
+        if [ -x "$(command -v deluser)" ]; then
+          deluser --quiet --system --remove-home git > /dev/null || true
+          echo "GIT user removed"
+        else
+          echo >&2 "not removing git system account because deluser command was not found"
+        fi        
         ;;
     *)
         ;;
 esac
+
+exit 0
