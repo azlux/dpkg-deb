@@ -2,7 +2,7 @@
 Description=WEBHOOKD
 
 [Service]
-ExecStart=webhookd
+ExecStart=/usr/local/bin/webhookd
 User=webhookd
 Group=webhookd
 EnvironmentFile=-/etc/default/webhookd.env
