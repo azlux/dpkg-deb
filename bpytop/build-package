@@ -23,8 +23,8 @@ tar xzf "$STARTDIR/bpytop.tar.gz"
 
 # Install files
 install -Dm 755 "$STARTDIR/bpytop-$new/bpytop.py" "$DESTDIR/usr/local/bin/bpytop"
-install -Dm 644 "$STARTDIR/README.md" "$DESTDIR/usr/local/share/bpytop/doc"
-install -dm 644 "$STARTDIR/themes" "$DESTDIR/usr/local/share/"
+install -Dm 644 "$STARTDIR/bpytop-$new/README.md" "$DESTDIR/usr/local/share/bpytop/doc"
+install -dm 644 "$STARTDIR/bpytop-$new/themes" "$DESTDIR/usr/local/share/"
 
 mkdir -p "$DESTDIR/DEBIAN"
 cp "$STARTDIR/DEBIAN/"* "$DESTDIR/DEBIAN/"
