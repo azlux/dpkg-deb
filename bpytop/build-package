@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Exit the script if any of the commands fail
+set -e
+set -u
+set -o pipefail
+
+# Set working directory to the location of this script
+cd "$(dirname "${BASH_SOURCE[0]}")"
+STARTDIR="$(pwd)"
+DESTDIR="$STARTDIR/pkg"
+OUTDIR="$STARTDIR/deb"
+mkdir "$OUTDIR"
+
+# get version
+repo="aristocratos/bpytop"
+api=$(curl --silent "https://api.github.com/repos/$repo/tags")
+new=$(echo $api | grep -Po '"name": "v\K.*?(?=")' | sort -V | tail -n 1)
+rm -rf "$DESTDIR"
+
+wget -q https://github.com/$repo/archive/v$new.tar.gz -O "$STARTDIR/bpytop.tar.gz"
+tar xzf "$STARTDIR/bpytop.tar.gz"
+
+# Install files
+install -Dm 755 "$STARTDIR/bpytop-$new/bpytop.py" "$DESTDIR/usr/local/bin/bpytop"
+install -Dm 644 "$STARTDIR/README.md" "$DESTDIR/usr/local/share/bpytop/doc"
+install -dm 644 "$STARTDIR/themes" "$DESTDIR/usr/local/share/"
+
+mkdir -p "$DESTDIR/DEBIAN"
+cp "$STARTDIR/DEBIAN/"* "$DESTDIR/DEBIAN/"
+
+# Modify control file for build
+sed -i "s/VERSION-TO-REPLACE/$new/" "$DESTDIR/DEBIAN/control"
+
+# Build .deb
+dpkg-deb --build "$DESTDIR" "$OUTDIR"
