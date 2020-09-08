@@ -15,6 +15,7 @@ rm -rf "$DESTDIR" "$OUTDIR"
 wget -q https://www.sheepit-renderfarm.com/media/applet/client-latest.php -O "$STARTDIR/sheepit-client.jar"
 
 install -Dm 755 "$STARTDIR/sheepit-client.jar" "$DESTDIR/usr/lib/sheepit-client.jar"
+install -Dm 755 "$STARTDIR/load_cuda.sh" "$DESTDIR/usr/local/sbin/load_cuda.sh"
 install -Dm 644 "$STARTDIR/sheepit.service" "$DESTDIR/etc/systemd/system/sheepit.service"
 
 mkdir -p "$DESTDIR/DEBIAN"
