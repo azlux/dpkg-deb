@@ -37,8 +37,11 @@ params+=" -compute-method $GPU_CPU"
 
 params+=" -priority $PRIORITY"
 params+=" -ui text"
+params+=" $ADD_CONF"
 
-sed -i 's~SHEEPIT_PARAMETERS~'"$params"'~' /etc/systemd/system/sheepit.service 
+txt_command="ExecStart=java -jar /usr/lib/sheepit-client.jar $params"
+
+sed -i 's~^ExecStart=.*~'"$txt_command"'~' /etc/systemd/system/sheepit.service 
 
 if [ -d  /run/systemd/system/ ]; then
     systemctl daemon-reload

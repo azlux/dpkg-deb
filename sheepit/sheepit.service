@@ -3,7 +3,7 @@ Description=SHEEPIT
 
 [Service]
 ExecStartPre=-/usr/local/sbin/load_cuda.sh
-ExecStart=java -jar /usr/lib/sheepit-client.jar SHEEPIT_PARAMETERS
+ExecStart=java -jar /usr/lib/sheepit-client.jar -h
 Restart=always
 Type=simple
 RestartSec=60s
