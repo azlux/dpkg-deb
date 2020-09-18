@@ -48,7 +48,7 @@ if [ -d  /run/systemd/system/ ]; then
     if [ ! "$(command -v java)" ]; then
         echo "Java not found, please be sure java is into your PATH"
     else
-        [ -n "$USER" ] && [ -n "$PASS" ] || echo " No User/Pasword config !! PLEASE DO \"dpkg-reconfigure sheepit\" !!"
+        [ -n "$USER" ] && [ -n "$PASS" ] || echo " No User/Password config !! PLEASE DO \"dpkg-reconfigure sheepit\" !!"
         systemctl enable sheepit
         systemctl restart sheepit || echo "! Systemd service failed to start, please check"
     fi
