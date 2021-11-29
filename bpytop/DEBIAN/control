@@ -3,8 +3,8 @@ Version: VERSION-TO-REPLACE
 Section: net
 Priority: optional
 Architecture: all
-Depends: python3-pip, python3
+Depends: python3, python3-distutils, python3-psutil (>= 5.7.0)
 Maintainer: Azlux <github@azlux.fr>
-Description: Linux/OSX/FreeBSD resource monitor, Python port of bashtop.
+Description: Linux/OSX/FreeBSD resource monitor that shows usage and stats for processor, memory, disks, network and processes.
 Homepage: https://github.com/aristocratos/bpytop
 Bugs: https://github.com/aristocratos/bpytop/issues
